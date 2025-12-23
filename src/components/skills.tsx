@@ -56,18 +56,6 @@ const Skills = () => {
     },
   }
 
-  const progressVariants = {
-    hidden: { width: 0 },
-    visible: (level: number) => ({
-      width: `${level}%`,
-      transition: {
-        duration: 1,
-        delay: 0.3,
-        ease: [0.6, -0.05, 0.01, 0.99] as [number, number, number, number],
-      },
-    }),
-  }
-
   return (
     <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8" ref={ref}>
       <div className="max-w-6xl mx-auto">
