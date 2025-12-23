@@ -25,7 +25,7 @@ export const parseNewlines = (text: string): (string | React.ReactElement)[] => 
  * @returns JSX element with paragraphs for each line
  */
 export const parseNewlinesToParagraphs = (text: string): React.ReactElement => {
-  const lines = text.split('\n').filter(line => line.trim() !== '')
+  const lines = text.split('\n').filter((line) => line.trim() !== '')
   return (
     <>
       {lines.map((line, index) => (
@@ -36,4 +36,3 @@ export const parseNewlinesToParagraphs = (text: string): React.ReactElement => {
     </>
   )
 }
-

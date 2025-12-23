@@ -2,13 +2,19 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { personalInfo } from '../data/portfolio'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../shadcn/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../shadcn/components/ui/card'
 import { User } from 'lucide-react'
 import { parseNewlines } from '../helpers/text'
 
 const About = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -61,13 +67,15 @@ const About = () => {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
         >
           <motion.div variants={itemVariants}>
             <Card className="bg-black/40 backdrop-blur-md border-white/10 shadow-xl">
               <CardHeader>
                 <CardTitle className="text-2xl text-yellow-400">{personalInfo.name}</CardTitle>
-                <CardDescription className="text-lg text-white/70">{personalInfo.title}</CardDescription>
+                <CardDescription className="text-lg text-white/70">
+                  {personalInfo.title}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-white/80 leading-relaxed text-base sm:text-lg text-left md:text-justify">

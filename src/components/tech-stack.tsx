@@ -16,7 +16,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 // Technology icon mapping to actual logo files
 const getTechIcon = (tech: string): string | null => {
   const techLower = tech.toLowerCase()
-  
+
   // Frontend
   if (techLower.includes('react')) return '/tech-stack/react.svg'
   if (techLower.includes('next')) return '/tech-stack/nextjs.svg'
@@ -29,19 +29,19 @@ const getTechIcon = (tech: string): string | null => {
   if (techLower.includes('ant design')) return '/tech-stack/antd.svg'
   if (techLower.includes('sanity cms')) return '/tech-stack/sanity.svg'
   if (techLower.includes('wxt dev')) return '/tech-stack/wxt.svg'
-  
+
   // Backend
   if (techLower.includes('node')) return '/tech-stack/nodejs.svg'
   if (techLower.includes('express')) return '/tech-stack/expressjs.png'
   if (techLower.includes('graphql')) return '/tech-stack/graphql.svg'
   if (techLower.includes('serverless')) return '/tech-stack/serverless.svg'
-  
+
   // Database
   if (techLower.includes('mongo')) return '/tech-stack/mongodb.svg'
   if (techLower.includes('postgres')) return '/tech-stack/postgress.png' // Note: filename has typo
   if (techLower.includes('mysql')) return '/tech-stack/mysql.svg'
   if (techLower.includes('hasura')) return '/tech-stack/hasura.png'
-  
+
   // Cloud & DevOps
   if (techLower.includes('aws')) return '/tech-stack/aws.svg'
   if (techLower.includes('docker')) return '/tech-stack/docker.svg'
@@ -51,7 +51,7 @@ const getTechIcon = (tech: string): string | null => {
   if (techLower.includes('lambda')) return '/tech-stack/lambda.svg'
   if (techLower.includes('convex')) return '/tech-stack/convex.svg'
   if (techLower.includes('vercel')) return '/tech-stack/vercel.svg'
-  
+
   // Tools
   if (techLower.includes('vs code') || techLower.includes('vscode')) return '/tech-stack/vscode.svg'
   if (techLower.includes('cursor')) return '/tech-stack/cursor.svg'
@@ -64,14 +64,14 @@ const getTechIcon = (tech: string): string | null => {
   if (techLower.includes('pop!_os')) return '/tech-stack/popos.png'
   if (techLower.includes('arch linux')) return '/tech-stack/arch.svg'
   if (techLower.includes('windows')) return '/tech-stack/windows.png'
-  
+
   // Default - no icon available
   return null
 }
 
 const TechStack = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -139,59 +139,54 @@ const TechStack = () => {
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
         >
           {techStack.map((category, idx) => (
-            <motion.div
-              key={idx}
-              variants={cardVariants}
-            >
-              <Card
-                className="bg-black/40 backdrop-blur-md border-white/10 shadow-xl hover:border-yellow-400/30 transition-all duration-300 hover:scale-105 will-change-transform h-full"
-              >
-              <CardHeader>
-                <CardTitle className="text-xl text-white flex items-center gap-2">
-                  <span className="text-yellow-400">
-                    {categoryIcons[category.name] || <Code className="w-5 h-5" />}
-                  </span>
-                  {category.name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  {category.technologies.map((tech, techIdx) => {
-                    const iconPath = getTechIcon(tech)
-                    return (
-                      <motion.div
-                        key={techIdx}
-                        custom={techIdx}
-                        variants={techItemVariants}
-                        initial="hidden"
-                        animate={isInView ? "visible" : "hidden"}
-                        className="group flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 cursor-default will-change-transform"
-                      >
-                        {iconPath ? (
-                          <div className="flex-shrink-0 w-5 h-5 group-hover:scale-110 transition-transform flex items-center justify-center will-change-transform">
-                            <img 
-                              src={iconPath} 
-                              alt={tech}
-                              className="w-5 h-5 object-contain grayscale-100 invert-100"
-                            />
-                          </div>
-                        ) : (
-                          <div className="flex-shrink-0 w-5 h-5 group-hover:scale-110 transition-transform flex items-center justify-center will-change-transform">
-                            <Code className="w-5 h-5 text-gray-400" />
-                          </div>
-                        )}
-                        <span className="text-sm font-medium text-white/90 group-hover:text-white transition-colors truncate will-change-transform">
-                          {tech}
-                        </span>
-                      </motion.div>
-                    )
-                  })}
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div key={idx} variants={cardVariants}>
+              <Card className="bg-black/40 backdrop-blur-md border-white/10 shadow-xl hover:border-yellow-400/30 transition-all duration-300 hover:scale-105 will-change-transform h-full">
+                <CardHeader>
+                  <CardTitle className="text-xl text-white flex items-center gap-2">
+                    <span className="text-yellow-400">
+                      {categoryIcons[category.name] || <Code className="w-5 h-5" />}
+                    </span>
+                    {category.name}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 gap-3">
+                    {category.technologies.map((tech, techIdx) => {
+                      const iconPath = getTechIcon(tech)
+                      return (
+                        <motion.div
+                          key={techIdx}
+                          custom={techIdx}
+                          variants={techItemVariants}
+                          initial="hidden"
+                          animate={isInView ? 'visible' : 'hidden'}
+                          className="group flex items-center gap-3 p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 hover:scale-105 cursor-default will-change-transform"
+                        >
+                          {iconPath ? (
+                            <div className="flex-shrink-0 w-5 h-5 group-hover:scale-110 transition-transform flex items-center justify-center will-change-transform">
+                              <img
+                                src={iconPath}
+                                alt={tech}
+                                className="w-5 h-5 object-contain grayscale-100 invert-100"
+                              />
+                            </div>
+                          ) : (
+                            <div className="flex-shrink-0 w-5 h-5 group-hover:scale-110 transition-transform flex items-center justify-center will-change-transform">
+                              <Code className="w-5 h-5 text-gray-400" />
+                            </div>
+                          )}
+                          <span className="text-sm font-medium text-white/90 group-hover:text-white transition-colors truncate will-change-transform">
+                            {tech}
+                          </span>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </motion.div>

@@ -1,7 +1,13 @@
 import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { contactInfo } from '../data/portfolio'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../shadcn/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../shadcn/components/ui/card'
 import { Button } from '../shadcn/components/ui/button'
 import { Mail, Phone, Linkedin, Github, Globe, Check, Copy } from 'lucide-react'
 
@@ -59,10 +65,10 @@ const Contacts = () => {
       copyable: false,
       type: 'website',
     },
-  ].filter(item => item.value)
+  ].filter((item) => item.value)
 
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -118,7 +124,8 @@ const Contacts = () => {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part
+            of your visions.
           </motion.p>
         </motion.div>
 
@@ -126,56 +133,65 @@ const Contacts = () => {
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
         >
           {contactItems.map((item, idx) => (
-            <motion.div
-              key={idx}
-              variants={cardVariants}
-            >
-              <Card
-                className="bg-black/40 backdrop-blur-md border-white/10 shadow-xl hover:border-yellow-400/30 transition-all duration-300 hover:scale-105 will-change-transform"
-              >
-              <CardHeader>
-                <div className="w-12 h-12 rounded-full bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-yellow-400 mb-2">
-                  {item.icon}
-                </div>
-                <CardTitle className="text-lg text-white">{item.label}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <CardDescription className="text-white/70 text-sm break-all">
-                  {item.value}
-                </CardDescription>
-                <div className="flex gap-2">
-                  {item.href && (
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 bg-transparent border-white/20 text-white hover:bg-yellow-400/10 hover:border-yellow-400/50 hover:text-yellow-400"
-                    >
-                      <a href={item.href} target={item.type === 'email' || item.type === 'phone' ? undefined : '_blank'} rel={item.type === 'email' || item.type === 'phone' ? undefined : 'noopener noreferrer'}>
-                        {item.type === 'email' ? 'Email' : item.type === 'phone' ? 'Call' : 'Visit'}
-                      </a>
-                    </Button>
-                  )}
-                  {item.copyable && item.value && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => copyToClipboard(item.value!, item.type)}
-                      className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:border-white/50"
-                    >
-                      {copied === item.type ? (
-                        <Check className="w-4 h-4 text-green-400" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div key={idx} variants={cardVariants}>
+              <Card className="bg-black/40 backdrop-blur-md border-white/10 shadow-xl hover:border-yellow-400/30 transition-all duration-300 hover:scale-105 will-change-transform">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-full bg-yellow-400/10 border border-yellow-400/30 flex items-center justify-center text-yellow-400 mb-2">
+                    {item.icon}
+                  </div>
+                  <CardTitle className="text-lg text-white">{item.label}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <CardDescription className="text-white/70 text-sm break-all">
+                    {item.value}
+                  </CardDescription>
+                  <div className="flex gap-2">
+                    {item.href && (
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 bg-transparent border-white/20 text-white hover:bg-yellow-400/10 hover:border-yellow-400/50 hover:text-yellow-400"
+                      >
+                        <a
+                          href={item.href}
+                          target={
+                            item.type === 'email' || item.type === 'phone' ? undefined : '_blank'
+                          }
+                          rel={
+                            item.type === 'email' || item.type === 'phone'
+                              ? undefined
+                              : 'noopener noreferrer'
+                          }
+                        >
+                          {item.type === 'email'
+                            ? 'Email'
+                            : item.type === 'phone'
+                              ? 'Call'
+                              : 'Visit'}
+                        </a>
+                      </Button>
+                    )}
+                    {item.copyable && item.value && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => copyToClipboard(item.value!, item.type)}
+                        className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:border-white/50"
+                      >
+                        {copied === item.type ? (
+                          <Check className="w-4 h-4 text-green-400" />
+                        ) : (
+                          <Copy className="w-4 h-4" />
+                        )}
+                      </Button>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </motion.div>

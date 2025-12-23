@@ -2,12 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { Button } from '../shadcn/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetTrigger,
-  SheetClose,
-} from '../shadcn/components/ui/sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '../shadcn/components/ui/sheet'
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -30,13 +25,14 @@ const Header = () => {
     const handleScroll = () => {
       const headerHeight = 80
       setIsScrolled(window.scrollY > 50)
-      
+
       // Scroll spy logic using document coordinates (avoid offsetParent issues)
-      const sections = navItems.map(item => item.href.substring(1))
+      const sections = navItems.map((item) => item.href.substring(1))
       const scrollPosition = window.scrollY + headerHeight + 20 // small buffer
 
       // Edge case: if we're at the very bottom, force-select the last section
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 5
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i])
@@ -62,16 +58,20 @@ const Header = () => {
       const timeoutId = setTimeout(() => {
         window.scrollTo({
           top: pendingScrollPosition.current!,
-          behavior: 'smooth'
+          behavior: 'smooth',
         })
         pendingScrollPosition.current = null
       }, 350) // Match sheet close animation duration
-      
+
       return () => clearTimeout(timeoutId)
     }
   }, [isMobileMenuOpen])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isMobile: boolean = false) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    isMobile: boolean = false,
+  ) => {
     e.preventDefault()
     const targetId = href.substring(1)
     const element = document.getElementById(targetId)
@@ -79,7 +79,7 @@ const Header = () => {
       // Calculate target scroll position accounting for header height
       const headerHeight = 80 // Approximate header height
       const targetScrollPosition = element.offsetTop - headerHeight
-      
+
       if (isMobile) {
         // For mobile: Store the target position and close the sheet
         // The useEffect will handle scrolling after the sheet closes
@@ -89,7 +89,7 @@ const Header = () => {
         // For desktop: Scroll immediately
         window.scrollTo({
           top: targetScrollPosition,
-          behavior: 'smooth'
+          behavior: 'smooth',
         })
       }
     }
@@ -153,8 +153,8 @@ const Header = () => {
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent 
-                side="left" 
+              <SheetContent
+                side="left"
                 className="w-[300px] sm:w-[350px] bg-black/95 backdrop-blur-xl border-white/10 p-0"
               >
                 <div className="flex flex-col h-full">
@@ -171,7 +171,7 @@ const Header = () => {
                       </Button>
                     </SheetClose>
                   </div>
-                  
+
                   {/* Navigation Items */}
                   <div className="flex flex-col p-4 space-y-2 flex-1 overflow-y-auto">
                     {navItems.map((item, idx) => (
@@ -206,12 +206,10 @@ const Header = () => {
                       </motion.a>
                     ))}
                   </div>
-                  
+
                   {/* Footer decoration */}
                   <div className="p-4 border-t border-white/10">
-                    <div className="text-xs text-white/50 text-center">
-                      Portfolio © 2025
-                    </div>
+                    <div className="text-xs text-white/50 text-center">Portfolio © 2025</div>
                   </div>
                 </div>
               </SheetContent>

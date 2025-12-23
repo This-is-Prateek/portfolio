@@ -1,4 +1,5 @@
 <!-- fc48ffc3-86d6-4caf-b2f0-81aaccb97ae9 888c51f2-127e-4bba-808e-9e245d40f16d -->
+
 # Modern Portfolio Website Implementation Plan
 
 ## Overview

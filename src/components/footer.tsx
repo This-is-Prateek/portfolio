@@ -5,7 +5,7 @@ import { personalInfo } from '../data/portfolio'
 const Footer = () => {
   const currentYear = new Date().getFullYear()
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-50px" })
+  const isInView = useInView(ref, { once: true, margin: '-50px' })
 
   return (
     <footer ref={ref} className="border-t border-white/10 bg-black/20 backdrop-blur-sm">
@@ -23,7 +23,9 @@ const Footer = () => {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <p className="text-white/70 text-sm">
-              © {currentYear} <span className="text-yellow-400 font-semibold">{personalInfo.name}</span>. All rights reserved.
+              © {currentYear}{' '}
+              <span className="text-yellow-400 font-semibold">{personalInfo.name}</span>. All rights
+              reserved.
             </p>
           </motion.div>
           <motion.div
@@ -49,4 +51,3 @@ const Footer = () => {
 }
 
 export default Footer
-

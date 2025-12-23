@@ -1,9 +1,8 @@
-import React, { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { Award, Brain, Languages, Target } from 'lucide-react'
+import React, { useRef } from 'react'
 import { skills } from '../data/portfolio'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../shadcn/components/ui/card'
-import { Progress } from '../shadcn/components/ui/progress'
-import { Target, Languages, Award, Brain } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '../shadcn/components/ui/card'
 
 const categoryIcons: Record<string, React.ReactNode> = {
   technical: <Brain className="w-5 h-5" />,
@@ -21,15 +20,18 @@ const categoryLabels: Record<string, string> = {
 
 const Skills = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  const groupedSkills = skills.reduce((acc, skill) => {
-    if (!acc[skill.category]) {
-      acc[skill.category] = []
-    }
-    acc[skill.category].push(skill)
-    return acc
-  }, {} as Record<string, typeof skills>)
+  const groupedSkills = skills.reduce(
+    (acc, skill) => {
+      if (!acc[skill.category]) {
+        acc[skill.category] = []
+      }
+      acc[skill.category].push(skill)
+      return acc
+    },
+    {} as Record<string, typeof skills>,
+  )
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -97,56 +99,55 @@ const Skills = () => {
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-2"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
         >
           {Object.entries(groupedSkills).map(([category, categorySkills]) => (
-            <motion.div
-              key={category}
-              variants={cardVariants}
-            >
-              <Card
-                className="bg-black/40 backdrop-blur-md border-white/10 shadow-xl hover:border-yellow-400/30 transition-all duration-300 hover:scale-105 will-change-transform h-full"
-              >
-              <CardHeader>
-                <CardTitle className="text-xl text-white flex items-center gap-2">
-                  <span className="text-yellow-400">
-                    {categoryIcons[category] || <Target className="w-5 h-5" />}
-                  </span>
-                  {categoryLabels[category] || category}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {categorySkills.map((skill, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="space-y-2"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                    transition={{ delay: 0.5 + idx * 0.1, duration: 0.4 }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/90 font-medium">{skill.name}</span>
-                      <motion.span
-                        className="text-yellow-400/80 text-sm font-semibold"
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                        transition={{ delay: 0.7 + idx * 0.1, duration: 0.3 }}
-                      >
-                        {skill.level}%
-                      </motion.span>
-                    </div>
-                    <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                      <motion.div
-                        className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600"
-                        initial={{ width: 0 }}
-                        animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
-                        transition={{ delay: 0.6 + idx * 0.1, duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-                      />
-                    </div>
-                  </motion.div>
-                ))}
-              </CardContent>
-            </Card>
+            <motion.div key={category} variants={cardVariants}>
+              <Card className="bg-black/40 backdrop-blur-md border-white/10 shadow-xl hover:border-yellow-400/30 transition-all duration-300 hover:scale-105 will-change-transform h-full">
+                <CardHeader>
+                  <CardTitle className="text-xl text-white flex items-center gap-2">
+                    <span className="text-yellow-400">
+                      {categoryIcons[category] || <Target className="w-5 h-5" />}
+                    </span>
+                    {categoryLabels[category] || category}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {categorySkills.map((skill, idx) => (
+                    <motion.div
+                      key={idx}
+                      className="space-y-2"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                      transition={{ delay: 0.5 + idx * 0.1, duration: 0.4 }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-white/90 font-medium">{skill.name}</span>
+                        <motion.span
+                          className="text-yellow-400/80 text-sm font-semibold"
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+                          transition={{ delay: 0.7 + idx * 0.1, duration: 0.3 }}
+                        >
+                          {skill.level}%
+                        </motion.span>
+                      </div>
+                      <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600"
+                          initial={{ width: 0 }}
+                          animate={isInView ? { width: `${skill.level}%` } : { width: 0 }}
+                          transition={{
+                            delay: 0.6 + idx * 0.1,
+                            duration: 0.8,
+                            ease: [0.6, -0.05, 0.01, 0.99],
+                          }}
+                        />
+                      </div>
+                    </motion.div>
+                  ))}
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </motion.div>
@@ -156,4 +157,3 @@ const Skills = () => {
 }
 
 export default Skills
-

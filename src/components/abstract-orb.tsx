@@ -15,7 +15,7 @@ const TorusBlob = () => {
 
   const [primary, secondary, accent] = useMemo(
     () => ['#60a5fa', '#a855f7', '#22d3ee'].map((c) => new THREE.Color(c)),
-    []
+    [],
   )
 
   useFrame(({ clock }) => {
@@ -27,8 +27,7 @@ const TorusBlob = () => {
     if (materialRef.current) {
       // Add a gentle breathing effect on the distortion
       const distortStrength = 0.2 + Math.sin(t * 1.2) * 0.08
-      ;(materialRef.current as unknown as { distort: number }).distort =
-        distortStrength
+      ;(materialRef.current as unknown as { distort: number }).distort = distortStrength
       materialRef.current.color.lerpColors(primary, secondary, (Math.sin(t) + 1) / 2)
       materialRef.current.emissive.lerpColors(secondary, accent, (Math.cos(t * 0.7) + 1) / 2)
     }
@@ -70,13 +69,7 @@ const AbstractOrb = () => {
 
         <Suspense fallback={null}>
           <TorusBlob />
-          <ContactShadows
-            position={[0, -3.5, 0]}
-            opacity={0.5}
-            scale={12}
-            blur={3}
-            far={4.5}
-          />
+          <ContactShadows position={[0, -3.5, 0]} opacity={0.5} scale={12} blur={3} far={4.5} />
           <Environment preset="city" />
         </Suspense>
 
@@ -95,4 +88,3 @@ const AbstractOrb = () => {
 }
 
 export default AbstractOrb
-

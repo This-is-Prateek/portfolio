@@ -1,14 +1,20 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { experience } from '../data/portfolio'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../shadcn/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../shadcn/components/ui/card'
 import { Separator } from '../shadcn/components/ui/separator'
 import { Badge } from '../shadcn/components/ui/badge'
 import { Briefcase, MapPin, Calendar, FolderKanban, ExternalLink, Award } from 'lucide-react'
 
 const Experience = () => {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -63,7 +69,7 @@ const Experience = () => {
           className="space-y-8"
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
+          animate={isInView ? 'visible' : 'hidden'}
         >
           {experience.map((exp, idx) => (
             <motion.div key={idx} variants={itemVariants} className="relative">
@@ -103,7 +109,7 @@ const Experience = () => {
                 <CardContent>
                   <Separator className="mb-4 bg-white/10" />
                   <p className="text-white/80 leading-relaxed mb-4">{exp.description}</p>
-                  
+
                   {/* Technologies */}
                   {/* <div className="flex flex-wrap gap-2 mb-6">
                     {exp.technologies.map((tech, techIdx) => (
@@ -151,7 +157,9 @@ const Experience = () => {
                       >
                         <motion.div
                           initial={{ rotate: -90, opacity: 0 }}
-                          animate={isInView ? { rotate: 0, opacity: 1 } : { rotate: -90, opacity: 0 }}
+                          animate={
+                            isInView ? { rotate: 0, opacity: 1 } : { rotate: -90, opacity: 0 }
+                          }
                           transition={{ delay: 0.5, duration: 0.4 }}
                         >
                           <FolderKanban className="w-5 h-5 text-yellow-400" />
@@ -172,7 +180,11 @@ const Experience = () => {
                             key={projIdx}
                             className="relative"
                             initial={{ opacity: 0, x: -30, scale: 0.95 }}
-                            animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: -30, scale: 0.95 }}
+                            animate={
+                              isInView
+                                ? { opacity: 1, x: 0, scale: 1 }
+                                : { opacity: 0, x: -30, scale: 0.95 }
+                            }
                             transition={{
                               delay: 0.5 + projIdx * 0.1,
                               duration: 0.5,
@@ -193,15 +205,19 @@ const Experience = () => {
                             <motion.div
                               className="absolute left-[-1.75rem] top-1.5 w-2 h-2 rounded-full bg-yellow-400 border-2 border-black/40"
                               initial={{ scale: 0, opacity: 0 }}
-                              animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                              animate={
+                                isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }
+                              }
                               transition={{ delay: 0.6 + projIdx * 0.1, duration: 0.3 }}
                             />
-                            
+
                             <div className="bg-white/5 rounded-lg p-4 border border-white/10 hover:border-yellow-400/30 hover:bg-white/10 transition-all duration-300">
                               <div className="flex items-start justify-between gap-4 mb-2">
                                 <div className="flex-1">
                                   <div className="flex items-center gap-2 mb-1">
-                                    <h5 className="text-base font-semibold text-white">{project.name}</h5>
+                                    <h5 className="text-base font-semibold text-white">
+                                      {project.name}
+                                    </h5>
                                     {project.link && (
                                       <a
                                         href={project.link}
@@ -213,7 +229,9 @@ const Experience = () => {
                                       </a>
                                     )}
                                   </div>
-                                  <p className="text-sm text-white/70 leading-relaxed">{project.description}</p>
+                                  <p className="text-sm text-white/70 leading-relaxed">
+                                    {project.description}
+                                  </p>
                                 </div>
                               </div>
                               {project.technologies && project.technologies.length > 0 && (
@@ -246,4 +264,3 @@ const Experience = () => {
 }
 
 export default Experience
-
